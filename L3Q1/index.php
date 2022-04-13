@@ -3,24 +3,20 @@
 <body>
 <title> Danish PHP </title>
 <h1> Danish Al-Muhaimin 205647</h1>
-<?php echo "D Letter ASCII ART:" ?>
+<?php
+echo nl2br("The SHA256 hash of 'Danish Al-Muhaimin' is \n");
+print hash('sha256', 'Danish Al-Muhaimin'); ?> <br>
+<p>D Letter ASCII ART: </p>
 <pre>
-     ____
+     __
     |  _"\
    /| | | |
-   U| |_| |\
-    |____/ u
-     |||_
-    (__)_)
+  U | |_| |\
+    |__  /  u
+      |||_
+     (_ )_)
 
 </pre>
-<?php
-$name = "Danish Al-Muhaimin";
-echo "The SHA256 hash of \"$name\" is \r\n";
-print hash('sha256', 'Danish Al-Muhaimin');
-?>
-
-
 <br>
 <br>
 <a href="http://localhost:8000/fail.php">Click here to check the error setting</a>
