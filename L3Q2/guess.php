@@ -1,6 +1,6 @@
 <?php session_start();  //starting session
 if(!isset($_SESSION['startNum']))
-$_SESSION['startNum'] = rand(1,50); // if not set define a new number between 1 and 50?>
+$_SESSION['startNum'] = rand(1,20); // if not set define a new number between 1 and 20?>
 
 <html>
 <title>Guessing Game Danish 205647</title>
@@ -30,11 +30,11 @@ input[type=text]{
   <h1>Danish's Guessing Game</h1>
 </div><br>
   <div style="text-align: center;">
-<span style="color:black;font-weight:bold">Enter a number between 1-50</span>
+<span style="color:black;font-weight:bold">Enter a number between 1-20</span>
 </div>
 <hr>
-<form method="get">
-        <input type="text" name="guess" id="guess" placeholder="0-50" required/>
+<form method="post">
+        <input type="text" name="guess" id="guess" placeholder="0-20" required/>
         <br>
         <div class="button" style="text-align:center;">
           <br>
@@ -45,19 +45,19 @@ input[type=text]{
 <p>
 
 <?php
-  if ( ! isset($_GET['guess']) ) {
+  if ( ! isset($_POST['guess']) ) {
     $_SESSION['attempt'] = 0;
     echo "<p align=center>Missing guess parameter</p>";
-  } else if ( strlen($_GET['guess']) < 1 ) {
+  } else if ( strlen($_POST['guess']) < 1 ) {
     $_SESSION['attempt']++;
     echo "<p align=center>#Attempt ". $_SESSION['attempt'] . "- Your guess is too short</p>";
-  } else if ( ! is_numeric($_GET['guess']) ) {
+  } else if ( ! is_numeric($_POST['guess']) ) {
     $_SESSION['attempt']++;
     echo "<p align=center>#Attempt ". $_SESSION['attempt'] ."- Your guess is not a number</p>";
-  } else if ( $_GET['guess'] < $_SESSION['startNum'] ) {
+  } else if ( $_POST['guess'] < $_SESSION['startNum'] ) {
     $_SESSION['attempt']++;
     echo "<p align=center>#Attempt ". $_SESSION['attempt'] ."- Your guess is too low</p>";
-  } else if ( $_GET['guess'] > $_SESSION['startNum']) {
+  } else if ( $_POST['guess'] > $_SESSION['startNum']) {
     $_SESSION['attempt']++;
     echo "<p align=center>#Attempt ". $_SESSION['attempt'] ."- Your guess is too high</p>";
   } else {
@@ -69,3 +69,4 @@ input[type=text]{
 </p>
 </body>
 </html>
+
