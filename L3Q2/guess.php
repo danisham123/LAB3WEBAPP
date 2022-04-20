@@ -1,8 +1,29 @@
-<?php session_start();  //starting session
+<?php session_start();  //starting session <---------- START OF MODEL
 if(!isset($_SESSION['startNum']))
-$_SESSION['startNum'] = rand(1,20); // if not set define a new number between 1 and 20?>
+$_SESSION['startNum'] = rand(1,20); // if not set define a new number between 1 and 20
+  if ( ! isset($_POST['guess']) ) {
+    $_SESSION['attempt'] = 0;
+    echo "<p align=center>Missing guess parameter</p>";
+  } else if ( strlen($_POST['guess']) < 1 ) {
+    $_SESSION['attempt']++;
+    echo "<p align=center>#Attempt ". $_SESSION['attempt'] . "- Your guess is too short</p>";
+  } else if ( ! is_numeric($_POST['guess']) ) {
+    $_SESSION['attempt']++;
+    echo "<p align=center>#Attempt ". $_SESSION['attempt'] ."- Your guess is not a number</p>";
+  } else if ( $_POST['guess'] < $_SESSION['startNum'] ) {
+    $_SESSION['attempt']++;
+    echo "<p align=center>#Attempt ". $_SESSION['attempt'] ."- Your guess is too low</p>";
+  } else if ( $_POST['guess'] > $_SESSION['startNum']) {
+    $_SESSION['attempt']++;
+    echo "<p align=center>#Attempt ". $_SESSION['attempt'] ."- Your guess is too high</p>";
+  } else {
+    $_SESSION['attempt']++;
+    echo "<p align=center>Congratulations - You are right with #". $_SESSION['attempt'] ." Attempts</p>";
+  } // <------------------ END OF MODEL
+?>
 
-<html>
+
+<html> <!--STARTING OF VIEW-->
 <title>Guessing Game Danish 205647</title>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
@@ -43,30 +64,6 @@ input[type=text]{
       </form>
 <hr>
 <p>
-
-<?php
-  if ( ! isset($_POST['guess']) ) {
-    $_SESSION['attempt'] = 0;
-    echo "<p align=center>Missing guess parameter</p>";
-  } else if ( strlen($_POST['guess']) < 1 ) {
-    $_SESSION['attempt']++;
-    echo "<p align=center>#Attempt ". $_SESSION['attempt'] . "- Your guess is too short</p>";
-  } else if ( ! is_numeric($_POST['guess']) ) {
-    $_SESSION['attempt']++;
-    echo "<p align=center>#Attempt ". $_SESSION['attempt'] ."- Your guess is not a number</p>";
-  } else if ( $_POST['guess'] < $_SESSION['startNum'] ) {
-    $_SESSION['attempt']++;
-    echo "<p align=center>#Attempt ". $_SESSION['attempt'] ."- Your guess is too low</p>";
-  } else if ( $_POST['guess'] > $_SESSION['startNum']) {
-    $_SESSION['attempt']++;
-    echo "<p align=center>#Attempt ". $_SESSION['attempt'] ."- Your guess is too high</p>";
-  } else {
-    $_SESSION['attempt']++;
-    echo "<p align=center>Congratulations - You are right with #". $_SESSION['attempt'] ." Attempts</p>";
-
-  }
-?>
 </p>
 </body>
-</html>
-
+</html> <!--END OF VIEW-->
